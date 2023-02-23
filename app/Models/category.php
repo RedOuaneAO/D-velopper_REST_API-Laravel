@@ -13,6 +13,13 @@ class category extends Model
     // public function article(){
     //     return $this->belongsTo(article::class);
     // }
+    
+    // protected $fillable=[
+    //     'category',
+    //     'image',
+    //     'article',
+    //     'id_Category',
+    // ];
     public function articles()
     {
         return $this->hasMany(article::class);

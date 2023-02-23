@@ -16,7 +16,6 @@ class ArticleController extends Controller
         ->select('articles.title','articles.article','articles.image','categories.type as category')->get();
         return response()->json($data);
     }
-   
-    
+  
  
 }

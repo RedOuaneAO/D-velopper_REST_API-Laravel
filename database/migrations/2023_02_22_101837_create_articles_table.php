@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string("image");
             $table->text("article");
             $table->foreignId('Category_id')->constrained('categories')->cascadeOnDelete();
-            $table->foreignId('id_Author_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('Author_id')->constrained('users')->cascadeOnDelete();
             $table->timestamps();
         });
     }

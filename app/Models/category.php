@@ -9,12 +9,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class category extends Model
 {
     use HasFactory;
-    
-    // public function article(){
-    //     return $this->belongsTo(article::class);
-    // }
-    public function articles()
-    {
-        return $this->hasMany(article::class);
-    }
+    protected $table = 'categories';
+
+    protected $fillable = [
+        'type',
+        'id_Admin'
+    ];
 }

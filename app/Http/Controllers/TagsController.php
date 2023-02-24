@@ -40,7 +40,7 @@ class TagsController extends Controller
         } else {
             $tags = tags::create([
                 'tag'=>$request->tag,
-                'id_Admin'=>'1'
+                'id_Admin'=>auth()->user()->id
             ]);
     
             if($tags){
@@ -100,7 +100,7 @@ class TagsController extends Controller
     
                 $tags->update([
                     'tag'=>$request->tag,
-                    'id_Admin'=>'1'
+                    'id_Admin'=>auth()->user()->id
                 ]);
     
                 return response()->json([

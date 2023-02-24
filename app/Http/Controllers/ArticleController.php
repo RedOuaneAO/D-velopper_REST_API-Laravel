@@ -8,8 +8,6 @@ use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
-    //
-   
 
     public function index(){
         $data = article::join('categories', 'articles.Category_id', '=', 'categories.id')

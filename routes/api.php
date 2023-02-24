@@ -38,5 +38,8 @@ Route::delete('tags/{id}/delete', [TagsController::class, 'delete']);
 
 
 Route::controller(CommantaireController::class)->group(function(){
+    Route::post('article/{id}/createComments','store');
+    Route::get('article/{idArticle}/fetshComments','index');
+    Route::delete('article/{id}/deleteComments/{idComment}','destroy');
     Route::post('createComments','store');
 });

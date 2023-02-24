@@ -115,8 +115,9 @@ class CategoryController extends Controller
             ], 404);
         }
     }
-}
 
+
+}
 
         public function delete($id)
 {

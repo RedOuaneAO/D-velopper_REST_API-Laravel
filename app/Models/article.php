@@ -13,7 +13,8 @@ class article extends Model
         'title',
         'image',
         'article',
-        'id_Category',
+        'Category_id',
+        'Author_id'
     ];
     public function category(){
         return $this->belongsTo(category::class , 'type');

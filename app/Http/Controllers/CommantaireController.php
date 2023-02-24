@@ -27,11 +27,7 @@ class CommantaireController extends Controller
             'comment' => 'max:1255',
         ];
         $validateData=$request->validate($rules);
-        // if(!$var=JWTAuth::user()){
-        //     return response()->json([
-        //         'message'=>'error authorisation'
-        //     ]);
-        // }
+     
         $comments=commantaire::create([
             'comment'=>$validateData['comment'],
             'id_user'=>auth()->user()->id,

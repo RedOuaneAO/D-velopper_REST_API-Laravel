@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class tags extends Model
 {
     use HasFactory;
+    protected $table = 'tags';
+
+    protected $fillable = [
+        'tag',
+        'id_Admin'
+    ];
 }

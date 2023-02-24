@@ -39,7 +39,7 @@ class CategoryController extends Controller
         } else {
             $category = Category::create([
                 'type'=>$request->type,
-                'id_Admin'=>'1'
+                'id_Admin'=>auth()->user()->id
             ]);
     
             if($category){
@@ -99,7 +99,7 @@ class CategoryController extends Controller
 
             $category->update([
                 'type'=>$request->type,
-                'id_Admin'=>'1'
+                'id_Admin'=>auth()->user()->id
             ]);
 
 

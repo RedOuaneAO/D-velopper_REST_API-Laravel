@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\article;
 use App\Models\category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -136,6 +137,11 @@ class CategoryController extends Controller
         'message' => 'Category deleted successfully',
     ], 200);
 }
-    
+    public function FilterByCategory($category){
+        $data=category::where('type','like',"%{$category}%")->get()->first();
+        $categoey_id=$data->id;
+        $article=article::where('Category_id',$categoey_id)->get();
+        return response()->json(['data'=>$article],200);
+    }
 
 }

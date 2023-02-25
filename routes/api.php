@@ -21,6 +21,8 @@ Route::post('category', [CategoryController::class, 'store']);
 Route::get('category/{id}/edit', [CategoryController::class, 'edit']);
 Route::put('category/{id}/edit', [CategoryController::class, 'update']);
 Route::delete('category/{id}/delete', [CategoryController::class, 'delete']);
+Route::get('FilterByCategory/{category}',[CategoryController::class,'FilterByCategory']);
+
 
 Route::get('/index' , [ArticleController::class , "index"]);
 Route::post('/addArticle' , [ArticleController::class , "addArticle"]);

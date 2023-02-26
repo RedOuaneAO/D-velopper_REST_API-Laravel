@@ -11,7 +11,7 @@ class ArticleController extends Controller
 
     public function index(){
         $data = article::join('categories', 'articles.Category_id', '=', 'categories.id')
-        ->select('articles.title','articles.article','articles.image','categories.type as category')->get();
+        ->select('articles.id','articles.title','articles.article','articles.image','categories.type as category')->get();
         return response()->json($data);
     }
 
@@ -23,7 +23,7 @@ class ArticleController extends Controller
         $data->image=$imgName;
         $data->article=$request->article;
         $data->Category_id=$request->Category_id;
-        $data->Author_id=1;
+        $data->Author_id=auth()->user()->id;
         $data->save();
 
         return response()->json([
@@ -32,6 +32,20 @@ class ArticleController extends Controller
             'article' => $data
         ], 201);
     }
+   
+    public function showArticle($id){
+        $data = article::join('categories', 'articles.Category_id', '=', 'categories.id')
+        ->select('articles.title','articles.article','articles.image','categories.type as category')->find($id);
+        if($data){
+            return response()->json($data);
+        }else{
+           return response()->json([
+                'status' => 404,
+                'message' => "No Such Article Found"
+            ], 404);
+        }
+    }
+
     public function deleteArticle($id){
         $data = article::find($id);
         if($data){
@@ -48,6 +62,5 @@ class ArticleController extends Controller
             ], 404);
         }
     }
-  
  
 }

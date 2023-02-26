@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\article;
 use App\Models\category;
 use App\Http\Controllers;
+use App\Models\tags;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -22,10 +23,18 @@ class ArticleController extends Controller
         $request->file('image')->move(public_path('img'), $imgName);
         $data->image=$imgName;
         $data->article=$request->article;
-        $data->Category_id=$request->Category_id;
+        //category by name
+        $category=$request->Category;
+        $cat=category::where('type','like', $category)->get()->first();
+        $data->Category_id=$cat->id;
         $data->Author_id=auth()->user()->id;
         $data->save();
-
+        //tag by name
+        $tags_string = implode(',', $request->tags);
+        $tagNames = explode(',', $tags_string);
+        $tagIds = tags::whereIn('tag', $tagNames)->pluck('id');
+        $data->Tags()->attach($tagIds);
+        // return $tagIds;
         return response()->json([
             'status' => true,
             'message' => "Article Created successfully!",

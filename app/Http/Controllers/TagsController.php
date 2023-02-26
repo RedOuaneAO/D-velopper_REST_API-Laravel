@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\haveTags;
 use App\Models\tags;
+use App\Models\article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -135,5 +137,11 @@ class TagsController extends Controller
             'message' => 'tag deleted successfully',
         ], 200);
     }
-    
+    public function FilterByTags($tag){
+        $data=tags::where('tag','like',"%{$tag}%")->get()->first();
+        $tag_id=$data->id;
+        $article=haveTags::where('Category_id',$tag_id)->get();
+        return response()->json(['data'=>$article],200);
+    }
+
 }

@@ -140,8 +140,9 @@ class TagsController extends Controller
     public function FilterByTags($tag){
         $data=tags::where('tag','like',"%{$tag}%")->get()->first();
         $tag_id=$data->id;
-        $article=haveTags::where('Category_id',$tag_id)->get();
-        return response()->json(['data'=>$article],200);
+        $tag=haveTags::where('id_tag',$tag_id)->pluck('id_Article');
+        $articles=article::whereIn('id',$tag)->get();
+        return response()->json(['data'=>$articles],200);
     }
 
 }

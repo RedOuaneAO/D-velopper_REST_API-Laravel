@@ -14,7 +14,7 @@ class article extends Model
         'image',
         'article',
         'Category_id',
-        'Author_id',
+        'Author_id'
     ];
     public function category()
     {

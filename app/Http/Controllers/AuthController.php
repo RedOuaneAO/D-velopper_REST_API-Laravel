@@ -33,7 +33,7 @@ class AuthController extends Controller
 
         $user = Auth::user();
         return response()->json([
-            // $user->id
+            $user->id,
                 'status' => 'success',
                 'user' => $user,
                 'authorisation' => [

@@ -10,6 +10,11 @@ use Illuminate\Http\Request;
 class ArticleController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
+
     public function index(){
         $data = article::join('categories', 'articles.Category_id', '=', 'categories.id')
         ->select('articles.id','articles.title','articles.article','articles.image','categories.type as category')->get();

@@ -15,4 +15,7 @@ class category extends Model
         'type',
         'id_Admin'
     ];
+    public function article(){
+        return $this->hasMany(article::class);
+    }
 }

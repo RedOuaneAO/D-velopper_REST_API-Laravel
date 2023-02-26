@@ -4,9 +4,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TagsController;
-use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommantaireController;
+use App\Http\Controllers\NewPasswordController;
+use App\Http\Controllers\PasswordResetController;
 
 Route::controller(AuthController::class)->group(function () {
     Route::post('login', 'login');
@@ -36,12 +38,12 @@ Route::controller(ArticleController::class)->group(function () {
 }); 
 
 
-
 Route::get('tags' , [TagsController::class , "index"]);
 Route::post('addTags' , [TagsController::class , "store"]);
 Route::get('tags/{id}/edit', [TagsController::class, 'edit']);
 Route::put('tags/{id}/edit', [TagsController::class, 'update']);
 Route::delete('tags/{id}/delete', [TagsController::class, 'delete']);
+Route::get('FilterTags/{tag}',[TagsController::class,'FilterByTags']);
 
 Route::controller(CommantaireController::class)->group(function(){
     Route::post('article/{id}/createComments','store');
@@ -49,3 +51,6 @@ Route::controller(CommantaireController::class)->group(function(){
     Route::delete('article/{id}/deleteComments/{idComment}','destroy');
     Route::post('createComments','store');
 });
+
+Route::post('forget-password', [PasswordResetController::class, 'sendEmail']);
+Route::post('reset-password', [NewPasswordController::class, 'passwordResetProcess']);

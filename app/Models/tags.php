@@ -14,4 +14,7 @@ class tags extends Model
         'tag',
         'id_Admin'
     ];
+    public function Articles(){
+        return $this->belongsToMany(article::class,'have_tags','id_Article','id_tag');
+    }
 }

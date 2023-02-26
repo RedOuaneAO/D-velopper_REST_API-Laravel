@@ -4,9 +4,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TagsController;
-use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommantaireController;
+use App\Http\Controllers\NewPasswordController;
+use App\Http\Controllers\PasswordResetController;
 
 Route::controller(AuthController::class)->group(function () {
     Route::post('login', 'login');
@@ -45,3 +47,6 @@ Route::controller(CommantaireController::class)->group(function(){
     Route::delete('article/{id}/deleteComments/{idComment}','destroy');
     Route::post('createComments','store');
 });
+
+Route::post('forget-password', [PasswordResetController::class, 'sendEmail']);
+Route::post('reset-password', [NewPasswordController::class, 'passwordResetProcess']);

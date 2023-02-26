@@ -39,7 +39,6 @@ Route::delete('tags/{id}/delete', [TagsController::class, 'delete']);
 Route::get('FilterTags/{tag}',[TagsController::class,'FilterByTags']);
 
 
-
 Route::controller(CommantaireController::class)->group(function(){
     Route::post('article/{id}/createComments','store');
     Route::get('article/{idArticle}/fetshComments','index');

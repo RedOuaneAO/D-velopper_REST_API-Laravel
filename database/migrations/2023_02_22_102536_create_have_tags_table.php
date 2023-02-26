@@ -13,14 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('have_tags', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->integer('role')->default(0);
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+            $table->unsignedBigInteger('id_Article');
+            $table->unsignedBigInteger('id_tag');
+            $table->foreign('id_Article')->references("id")->on("articles")->onDelete("cascade");
+            $table->foreign('id_tag')->references("id")->on("tags")->onDelete("cascade");
             $table->timestamps();
         });
     }
@@ -32,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('have_tags');
     }
 };

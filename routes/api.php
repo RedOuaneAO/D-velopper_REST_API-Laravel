@@ -36,6 +36,7 @@ Route::post('addTags' , [TagsController::class , "store"]);
 Route::get('tags/{id}/edit', [TagsController::class, 'edit']);
 Route::put('tags/{id}/edit', [TagsController::class, 'update']);
 Route::delete('tags/{id}/delete', [TagsController::class, 'delete']);
+Route::get('FilterTags/{tag}',[TagsController::class,'FilterByTags']);
 
 
 

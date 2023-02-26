@@ -63,4 +63,30 @@ class ArticleController extends Controller
         }
     }
  
+    public function updateArticle(Request $request,$id){
+        $data =article::find($id);
+        // return $data;
+        if(!$data){
+            return response()->json([
+                'status' => 404,
+                'message' => "No Such Article Found"
+            ], 404);
+        }
+        if (!empty(request()->hasFile('image'))) {
+            $imgName = request()->file('image')->getClientOriginalName();
+            request()->image->move(public_path('img'), $imgName);
+            $data->image = $imgName;
+            $data->update();
+        }
+        $data->update(request()->except('image'));
+        // $data->where('id',$id)->update([
+        //     'title'=> $request->input('title'),
+        //     'article'=> $request->input('article')
+        // ]);
+        return response()->json([
+            'status' => true,
+            'message' => "The article updated successfully",
+            'article' => $data
+        ], 200);
+    }
 }

@@ -62,6 +62,7 @@ class ArticleController extends Controller
             ], 404);
         }
     }
+    
  
     public function updateArticle(Request $request,$id){
         $data =article::find($id);

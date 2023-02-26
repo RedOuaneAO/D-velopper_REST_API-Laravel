@@ -46,6 +46,21 @@ class ArticleController extends Controller
         }
     }
 
-  
+    public function deleteArticle($id){
+        $data = article::find($id);
+        if($data){
+            $data->delete();
+            return response()->json([
+                'status' => true,
+                'message' => "This article deleted successfully",
+                'article' => $data
+            ], 200);
+        }else{
+            return response()->json([
+                'status' => 404,
+                'message' => "No Such Article Found"
+            ], 404);
+        }
+    }
  
 }

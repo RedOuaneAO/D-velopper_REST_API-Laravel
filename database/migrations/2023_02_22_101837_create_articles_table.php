@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string("title");
             $table->string("image");
             $table->text("article");
-            $table->foreignId('Category_id')->constrained('categories')->cascadeOnDelete();
+            $table->unsignedBigInteger('Category_id');
+            $table->foreign('Category_id')->references("id")->on("categories")->onDelete("cascade");
             $table->foreignId('Author_id')->constrained('users')->cascadeOnDelete();
             $table->timestamps();
         });

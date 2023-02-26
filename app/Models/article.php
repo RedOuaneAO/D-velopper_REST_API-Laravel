@@ -16,9 +16,9 @@ class article extends Model
         'Category_id',
         'Author_id'
     ];
-    public function category()
+    public function type()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(category::class);
     }
     public function user()
     {

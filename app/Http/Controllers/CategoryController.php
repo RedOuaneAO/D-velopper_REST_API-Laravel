@@ -94,27 +94,27 @@ class CategoryController extends Controller
     } else {
 
         $category = Category::find($id);
+        return $request;
+
+        // if($category){
+
+        //     $category->update([
+        //         'type'=>$request->type,
+        //         'id_Admin'=>auth()->user()->id
+        //     ]);
 
 
-        if($category){
 
-            $category->update([
-                'type'=>$request->type,
-                'id_Admin'=>auth()->user()->id
-            ]);
-
-
-
-            return response()->json([
-                'status'=>200,
-                'message'=>"update successfully"
-            ], 200);
-        } else {
-            return response()->json([
-                'status'=>404,
-                'message'=>"category not found"
-            ], 404);
-        }
+        //     return response()->json([
+        //         'status'=>200,
+        //         'message'=>"update successfully"
+        //     ], 200);
+        // } else {
+        //     return response()->json([
+        //         'status'=>404,
+        //         'message'=>"category not found"
+        //     ], 404);
+        // }
     }
 
 

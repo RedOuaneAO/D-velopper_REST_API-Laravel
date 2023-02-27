@@ -16,6 +16,6 @@ class category extends Model
         'id_Admin'
     ];
     public function article(){
-        return $this->hasMany(article::class);
+        return $this->belongsToMany(article::class);
     }
 }

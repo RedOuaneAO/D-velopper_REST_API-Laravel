@@ -16,7 +16,7 @@ class article extends Model
         'Category_id',
         'Author_id'
     ];
-    public function type()
+    public function category()
     {
         return $this->belongsTo(category::class);
     }

@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\tags;
 use App\Models\article;
 use App\Models\category;
 use App\Http\Controllers;
-use App\Models\tags;
+use App\Models\commantaire;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -49,8 +50,14 @@ class ArticleController extends Controller
    
     public function showArticle($id){
         $data = article::join('categories', 'articles.Category_id', '=', 'categories.id')
-        ->select('articles.title','articles.article','articles.image','categories.type as category')->find($id);
+        ->select('articles.title','articles.article','articles.image','categories.type as category')->where('articles.id', $id)->first();
         if($data){
+            $comments = commantaire::where('id_article',$id)->get();
+            $cmts=$comments->pluck('comment');
+            $tags=article::where('id',$id)->with('tags')->first();
+            $tgs=$tags->tags->pluck("tag");
+            $data->comments = $cmts;
+            $data->Tags=$tgs;
             return response()->json($data);
         }else{
            return response()->json([

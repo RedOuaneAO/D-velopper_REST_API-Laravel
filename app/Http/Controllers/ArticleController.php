@@ -85,7 +85,7 @@ class ArticleController extends Controller
     }
     
  
-    public function update(Request $request,$id){
+    public function updateArticle(Request $request,$id){
         $data =article::find($id);
         if(!$data){
             return response()->json([

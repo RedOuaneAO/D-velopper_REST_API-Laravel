@@ -30,11 +30,11 @@ Route::controller(CategoryController::class)->group(function () {
 // =================>
 Route::controller(ArticleController::class)->group(function () {
  
-    Route::get('/index' , [ArticleController::class , "index"]);
-    Route::post('/addArticle' , [ArticleController::class , "addArticle"]);
-    Route::get('/show/{id}' , [ArticleController::class , "showArticle"]);
-    Route::put('/update/{id}' , [ArticleController::class , "updateArticle"]);
-    Route::delete('/delete/{id}' , [ArticleController::class , "deleteArticle"]);
+    Route::get('article/index' , [ArticleController::class , "index"]);
+    Route::post('article/addArticle' , [ArticleController::class , "addArticle"]);
+    Route::get('article/show/{id}' , [ArticleController::class , "showArticle"]);
+    Route::put('article/update/{id}' , [ArticleController::class , "updateArticle"]);
+    Route::delete('article/delete/{id}' , [ArticleController::class , "deleteArticle"]);
 }); 
 
 
@@ -49,7 +49,6 @@ Route::controller(CommantaireController::class)->group(function(){
     Route::post('article/{id}/createComments','store');
     Route::get('article/{idArticle}/fetshComments','index');
     Route::delete('article/{id}/deleteComments/{idComment}','destroy');
-    Route::post('createComments','store');
 });
 
 Route::post('forget-password', [PasswordResetController::class, 'sendEmail']);

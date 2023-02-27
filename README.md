@@ -24,6 +24,54 @@ Amine
 Nadir
 ```
 
+## register
+** method : post
+** endpoint : /register
+** inputs : 
+            name: exampl
+            email: example@gmail.com
+            password : ******
 
+** output :
+            {
+    "status": "success",
+    "user": {
+        "id": 6,
+        "name": "exampl",
+        "role": 0,
+        "email": "example@gmail.com",
+        "email_verified_at": null,
+        "created_at": "2023-02-26T16:20:27.000000Z",
+        "updated_at": "2023-02-26T16:20:27.000000Z"
+    },
+    "authorisation": {
+        "token": "token",
+        "type": "bearer"
+    }
+}
+## login
+** method : post
+** endpoint : /login
+** inputs : 
+            email: example@gmail.com
+            password : ******
+
+** output :
+            {
+    "status": "success",
+    "user": {
+        "id": 6,
+        "name": "exampl",
+        "role": 0,
+        "email": "example@gmail.com",
+        "email_verified_at": null,
+        "created_at": "2023-02-26T16:20:27.000000Z",
+        "updated_at": "2023-02-26T16:20:27.000000Z"
+    },
+    "authorisation": {
+        "token": "token",
+        "type": "bearer"
+    }
+}
 
 

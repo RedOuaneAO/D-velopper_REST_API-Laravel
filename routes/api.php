@@ -17,8 +17,29 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('refresh', 'refresh');
     Route::get('me', 'me');
 });
-// ======================
 
+// =================>
+
+Route::controller(ArticleController::class)->group(function () {
+ 
+    Route::get('article/index' , [ArticleController::class , "index"]);
+    Route::post('article/addArticle' , [ArticleController::class , "addArticle"]);
+    Route::get('article/show/{id}' , [ArticleController::class , "showArticle"]);
+    Route::put('article/update/{id}' , [ArticleController::class , "updateArticle"]);
+    Route::delete('article/delete/{id}' , [ArticleController::class , "deleteArticle"]);
+}); 
+
+//admin
+Route::middleware('admin')->group(function () {
+    //tags
+    Route::get('tags' , [TagsController::class , "index"]);
+    Route::post('addTags' , [TagsController::class , "store"]);
+    Route::get('tags/{id}/edit', [TagsController::class, 'edit']);
+    Route::put('tags/{id}/edit', [TagsController::class, 'update']);
+    Route::delete('tags/{id}/delete', [TagsController::class, 'delete']);
+    Route::get('FilterTags/{tag}',[TagsController::class,'FilterByTags']);
+    //Category
+    // ======================
 Route::controller(CategoryController::class)->group(function () {
     Route::get('category', [CategoryController::class, 'index']);
     Route::post('category', [CategoryController::class, 'store']);
@@ -27,29 +48,14 @@ Route::controller(CategoryController::class)->group(function () {
     Route::delete('category/{id}/delete', [CategoryController::class, 'delete']);
     Route::get('FilterByCategory/{category}',[CategoryController::class,'FilterByCategory']);
 }); 
-// =================>
-Route::controller(ArticleController::class)->group(function () {
- 
-    Route::get('/index' , [ArticleController::class , "index"]);
-    Route::post('/addArticle' , [ArticleController::class , "addArticle"]);
-    Route::get('/show/{id}' , [ArticleController::class , "showArticle"]);
-    Route::put('/update/{id}' , [ArticleController::class , "updateArticle"]);
-    Route::delete('/delete/{id}' , [ArticleController::class , "deleteArticle"]);
-}); 
 
+});
 
-Route::get('tags' , [TagsController::class , "index"]);
-Route::post('addTags' , [TagsController::class , "store"]);
-Route::get('tags/{id}/edit', [TagsController::class, 'edit']);
-Route::put('tags/{id}/edit', [TagsController::class, 'update']);
-Route::delete('tags/{id}/delete', [TagsController::class, 'delete']);
-Route::get('FilterTags/{tag}',[TagsController::class,'FilterByTags']);
 
 Route::controller(CommantaireController::class)->group(function(){
     Route::post('article/{id}/createComments','store');
     Route::get('article/{idArticle}/fetshComments','index');
     Route::delete('article/{id}/deleteComments/{idComment}','destroy');
-    Route::post('createComments','store');
 });
 
 Route::post('forget-password', [PasswordResetController::class, 'sendEmail']);

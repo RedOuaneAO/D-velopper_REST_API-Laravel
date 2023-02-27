@@ -17,10 +17,14 @@ class PasswordResetController extends Controller
     public function sendEmail(Request $request)
     {
         if (!$this->validateEmail($request->email)) {
-            return $this->failedResponse();
+            return response()->json([
+                'error' => 'Email does\'t exist on our database'
+            ], 404);
         } 
         $this->send($request->email);
-        return $this->successResponse();
+        return response()->json([
+            'data' => 'Reset Email is send successfully, please check your inbox.'
+        ], 200);
     }
 
     public function send($email) 
@@ -57,17 +61,5 @@ class PasswordResetController extends Controller
         return !!User::where('email', $email)->first();
     }
 
-    public function failedResponse()
-    {
-        return response()->json([
-            'error' => 'Email does\'t exist on our database'
-        ], Response::HTTP_NOT_FOUND);
-    }
-
-    public function successResponse()
-    {
-        return response()->json([
-            'data' => 'Reset Email is send successfully, please check your inbox.'
-        ], Response::HTTP_OK);
-    }
+   
 }

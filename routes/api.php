@@ -17,17 +17,9 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('refresh', 'refresh');
     Route::get('me', 'me');
 });
-// ======================
 
-Route::controller(CategoryController::class)->group(function () {
-    Route::get('category', [CategoryController::class, 'index']);
-    Route::post('category', [CategoryController::class, 'store']);
-    Route::get('category/{id}/edit', [CategoryController::class, 'edit']);
-    Route::put('category/{id}/edit', [CategoryController::class, 'update']);
-    Route::delete('category/{id}/delete', [CategoryController::class, 'delete']);
-    Route::get('FilterByCategory/{category}',[CategoryController::class,'FilterByCategory']);
-}); 
 // =================>
+
 Route::controller(ArticleController::class)->group(function () {
  
     Route::get('article/index' , [ArticleController::class , "index"]);
@@ -37,13 +29,28 @@ Route::controller(ArticleController::class)->group(function () {
     Route::delete('article/delete/{id}' , [ArticleController::class , "deleteArticle"]);
 }); 
 
+//admin
+Route::middleware('admin')->group(function () {
+    //tags
+    Route::get('tags' , [TagsController::class , "index"]);
+    Route::post('addTags' , [TagsController::class , "store"]);
+    Route::get('tags/{id}/edit', [TagsController::class, 'edit']);
+    Route::put('tags/{id}/edit', [TagsController::class, 'update']);
+    Route::delete('tags/{id}/delete', [TagsController::class, 'delete']);
+    Route::get('FilterTags/{tag}',[TagsController::class,'FilterByTags']);
+    //Category
+    // ======================
+Route::controller(CategoryController::class)->group(function () {
+    Route::get('category', [CategoryController::class, 'index']);
+    Route::post('category', [CategoryController::class, 'store']);
+    Route::get('category/{id}/edit', [CategoryController::class, 'edit']);
+    Route::put('category/{id}/edit', [CategoryController::class, 'update']);
+    Route::delete('category/{id}/delete', [CategoryController::class, 'delete']);
+    Route::get('FilterByCategory/{category}',[CategoryController::class,'FilterByCategory']);
+}); 
 
-Route::get('tags' , [TagsController::class , "index"]);
-Route::post('addTags' , [TagsController::class , "store"]);
-Route::get('tags/{id}/edit', [TagsController::class, 'edit']);
-Route::put('tags/{id}/edit', [TagsController::class, 'update']);
-Route::delete('tags/{id}/delete', [TagsController::class, 'delete']);
-Route::get('FilterTags/{tag}',[TagsController::class,'FilterByTags']);
+});
+
 
 Route::controller(CommantaireController::class)->group(function(){
     Route::post('article/{id}/createComments','store');
